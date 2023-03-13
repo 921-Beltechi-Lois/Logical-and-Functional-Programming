@@ -1,0 +1,17 @@
+%flow model (i,i)
+% valley(L- given list, Flag - bool number).
+valley([_],0):-!. % base
+valley([H1,H2|T],F):-
+    H1 > H2,		%case1
+    F =:= 1,
+    valley([H2|T],1).
+valley([H1,H2|T],_):- % case 2
+    H1<H2,
+    valley([H2|T],0).
+
+% mainV(L - given list)
+% flow model(i)
+mainV(L):-
+    L=[H1,H2|_],
+    H1>H2,     %check first 2
+    valley(L,1).
